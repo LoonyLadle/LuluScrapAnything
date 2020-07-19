@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<Patch>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="Neutroamine"]</xpath>
+		<value>
+			<intricate>true</intricate>
+		</value>
+	</Operation>
+	
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[@Name="DrugBase"]</xpath>
+		<value>
+			<intricate>true</intricate>
+		</value>
+	</Operation>
+</Patch>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<ModMetaData>
+	<name>Lulu's Scrap Anything</name>
+	<author>LoonyLadle</author>
+	<packageId>LoonyLadle.RimWorld.ScrapAnything</packageId>
+	<description>Scrap anything.</description>
+	<url>https://ludeon.com/forums/index.php?topic=49129</url>
+	<supportedVersions>
+		<li>1.1</li>
+	</supportedVersions>
+	<modDependencies />
+	<loadBefore />
+	<loadAfter />
+	<incompatibleWith />
+</ModMetaData>

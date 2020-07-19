@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<ModSyncNinjaData>
+	<ID>73e63b44-a16d-45ee-8b59-a88503e5de7b</ID>
+	<ModName>Lulu's Scrap Anything</ModName>
+	<Version>0.1.0</Version>
+	<SaveBreaking>False</SaveBreaking>
+	<Host name="Github">
+		<Owner>LoonyLadle</Owner>
+		<Project>LuluScrapAnything</Project>
+		<AboutDir>About</AboutDir>
+		<DownloadFrom>ModSyncReleases</DownloadFrom>
+		<Branch>master</Branch>
+	</Host>
+</ModSyncNinjaData>
