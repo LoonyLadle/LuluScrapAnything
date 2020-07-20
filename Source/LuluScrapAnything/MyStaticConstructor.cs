@@ -45,6 +45,17 @@ namespace LoonyLadle.ScrapAnything
 					recipeUsers = new List<ThingDef> { workTable },
 					ingredients = new List<IngredientCount> { newCount },
 					fixedIngredientFilter = newFilter,
+					forceHiddenSpecialFilters = new List<SpecialThingFilterDef>
+					{
+						MyDefOf.AllowBurnableApparel,
+						MyDefOf.AllowBurnableWeapons,
+						MyDefOf.AllowNonBurnableApparel,
+						MyDefOf.AllowNonBurnableWeapons,
+						MyDefOf.AllowNonSmeltableApparel,
+						MyDefOf.AllowNonSmeltableWeapons,
+						MyDefOf.AllowSmeltable,
+						MyDefOf.AllowSmeltableApparel,
+					}
 				};
 				generatedRecipe.ResolveReferences();
 				DefDatabase<RecipeDef>.Add(generatedRecipe);
