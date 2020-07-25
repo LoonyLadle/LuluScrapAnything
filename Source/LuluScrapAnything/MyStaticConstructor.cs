@@ -31,9 +31,9 @@ namespace LoonyLadle.ScrapAnything
 				RecipeDef generatedRecipe = new RecipeDef
 				{
 					defName = "LuluScrapAnything_DisassembleAt" + workTable.defName,
-					label = "disassemble",
-					description = "Disassemble things made at this workbench to reclaim some of the resources used.",
-					jobString = "Disassembling at " + workTable.label + ".",
+					label = "LuluScrapAnything_BillLabel".Translate(),
+					description = "LuluScrapAnything_BillDesc".Translate(),
+					jobString = "LuluScrapAnything_BillJob".Translate(workTable.label),
 					workAmount = 1600,
 					workSpeedStat = MyDefOf.SmeltingSpeed,
 					effectWorking = tableRecipes.GroupBy(r => r.effectWorking).OrderByDescending(g => g.Count()).Select(o => o.Key).First(),
