@@ -1,11 +1,8 @@
-﻿using System;
+﻿using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using Verse;
-using RimWorld;
 
 namespace LoonyLadle.ScrapAnything
 {
@@ -15,7 +12,6 @@ namespace LoonyLadle.ScrapAnything
 		static MyStaticConstructor()
 		{
 			IEnumerable<ThingDef> workTables = DefDatabase<ThingDef>.AllDefs.Where(t => t.IsWorkTable);
-			//Log.Message($"LuluScrapAnything: recipeUsers contains {workTables.Count()} entries: {workTables.ToStringSafeEnumerable()}.");
 
 			foreach (ThingDef workTable in workTables)
 			{
@@ -24,7 +20,6 @@ namespace LoonyLadle.ScrapAnything
 				if (!tableRecipes.Any()) continue;
 
 				ThingFilter newFilter = new ThingFilter();
-				//newFilter.thingDefs = tableProducts;
 				typeof(ThingFilter).GetField("thingDefs", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(newFilter, tableRecipes.Select(r => r.ProducedThingDef).ToList());
 
 				IngredientCount newCount = new IngredientCount();
@@ -34,23 +29,33 @@ namespace LoonyLadle.ScrapAnything
 				RecipeDef generatedRecipe = new RecipeDef
 				{
 					defName = "LuluScrapAnything_DisassembleAt" + workTable.defName,
-					label = "disassemble",
-					description = "Disassemble things made at this workbench to reclaim some of the resources used.",
-					jobString = "Disassembling at " + workTable.label + ".",
+					label = "LuluScrapAnything_BillLabel".Translate(),
+					description = "LuluScrapAnything_BillDesc".Translate(),
+					jobString = "LuluScrapAnything_BillJob".Translate(workTable.label),
 					workAmount = 1600,
 					workSpeedStat = MyDefOf.SmeltingSpeed,
-					effectWorking = tableRecipes.First().effectWorking,
-					soundWorking = tableRecipes.First().soundWorking,
+					effectWorking = tableRecipes.GroupBy(r => r.effectWorking).OrderByDescending(g => g.Count()).Select(o => o.Key).First(),
+					soundWorking = tableRecipes.GroupBy(r => r.soundWorking).OrderByDescending(g => g.Count()).Select(o => o.Key).First(),
 					specialProducts = new List<SpecialProductType> { SpecialProductType.Smelted },
 					recipeUsers = new List<ThingDef> { workTable },
 					ingredients = new List<IngredientCount> { newCount },
 					fixedIngredientFilter = newFilter,
+					forceHiddenSpecialFilters = new List<SpecialThingFilterDef>
+					{
+						MyDefOf.AllowBurnableApparel,
+						MyDefOf.AllowBurnableWeapons,
+						MyDefOf.AllowNonBurnableApparel,
+						MyDefOf.AllowNonBurnableWeapons,
+						MyDefOf.AllowNonSmeltableApparel,
+						MyDefOf.AllowNonSmeltableWeapons,
+						MyDefOf.AllowSmeltable,
+						MyDefOf.AllowSmeltableApparel,
+					}
 				};
 				generatedRecipe.ResolveReferences();
 				DefDatabase<RecipeDef>.Add(generatedRecipe);
-				// Clear the recipe cache because we've added a new one.
+				// Clear the recipe cache because we've added a new recipe.
 				typeof(ThingDef).GetField("allRecipesCached", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(workTable, null);
-				//Log.Message($"LuluScrapAnything: recipes for table {workTable.defName} contains {tableRecipes.Count()} entries: {tableRecipes.ToStringSafeEnumerable()}.");
 			}
 		}
 

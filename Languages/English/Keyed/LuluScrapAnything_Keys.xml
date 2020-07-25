@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<LanguageData>
+	<LuluScrapAnything_BillLabel>disassemble</LuluScrapAnything_BillLabel>
+	<LuluScrapAnything_BillDesc>Disassemble things made at this workbench to reclaim some of the resources used.</LuluScrapAnything_BillDesc>
+	<LuluScrapAnything_BillJob>Disassembling at {0}.</LuluScrapAnything_BillJob>
+</LanguageData>
