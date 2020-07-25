@@ -12,7 +12,6 @@ namespace LoonyLadle.ScrapAnything
 		static MyStaticConstructor()
 		{
 			IEnumerable<ThingDef> workTables = DefDatabase<ThingDef>.AllDefs.Where(t => t.IsWorkTable);
-			//Log.Message($"LuluScrapAnything: recipeUsers contains {workTables.Count()} entries: {workTables.ToStringSafeEnumerable()}.");
 
 			foreach (ThingDef workTable in workTables)
 			{
@@ -21,7 +20,6 @@ namespace LoonyLadle.ScrapAnything
 				if (!tableRecipes.Any()) continue;
 
 				ThingFilter newFilter = new ThingFilter();
-				//newFilter.thingDefs = tableProducts;
 				typeof(ThingFilter).GetField("thingDefs", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(newFilter, tableRecipes.Select(r => r.ProducedThingDef).ToList());
 
 				IngredientCount newCount = new IngredientCount();
@@ -56,9 +54,8 @@ namespace LoonyLadle.ScrapAnything
 				};
 				generatedRecipe.ResolveReferences();
 				DefDatabase<RecipeDef>.Add(generatedRecipe);
-				// Clear the recipe cache because we've added a new one.
+				// Clear the recipe cache because we've added a new recipe.
 				typeof(ThingDef).GetField("allRecipesCached", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(workTable, null);
-				//Log.Message($"LuluScrapAnything: recipes for table {workTable.defName} contains {tableRecipes.Count()} entries: {tableRecipes.ToStringSafeEnumerable()}.");
 			}
 		}
 
